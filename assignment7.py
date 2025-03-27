@@ -4,6 +4,7 @@ from dash import Dash, dcc, html, Input, Output
 import plotly.express as px
 import webbrowser
 import threading
+import os
 
 
 # Creating dataset
@@ -91,5 +92,5 @@ def display_year(selected_year):
     return f"In {selected_year} the winner was {row['Winner']} and the runner-up was {row['Runner-Up']}"
 
 if __name__ == "__main__":
-    threading.Timer(1, lambda: webbrowser.open("http://127.0.0.1:8050")).start()  #Open browser
-    app.run_server(debug=True, use_reloader=False)
+    port = int(os.environ.get("PORT", 8050))
+    app.run_server(host="0.0.0.0", port=port, debug=True)
